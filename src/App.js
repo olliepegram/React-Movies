@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import Featured from './Featured';
 import Header from './Header';
 
+const apiKey = process.env.REACT_APP_API_KEY;
+const FEATURED_API = `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`;
+
 const Wrapper = styled.div`
     @font-face {
         font-family: 'Ubuntu';
@@ -12,6 +15,8 @@ const Wrapper = styled.div`
     font-family: 'Ubuntu', --apple-system, BlinkMacSystemFont, 'Segoe UI',
         Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
         sans-serif;
+    margin: 0;
+    padding: 0;
 `;
 
 const App = () => {
@@ -19,26 +24,24 @@ const App = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(
-            'https://api.themoviedb.org/3/trending/movie/week?api_key=270acf29969ace557d877eb41954b02e'
-        )
+        getMovies(FEATURED_API);
+    }, []);
+
+    const getMovies = (API) => {
+        setLoading(true);
+        fetch(API)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data.results);
                 return setMovies(data.results);
             })
             .then(() => {
                 setLoading(false);
             });
-    }, []);
-
-    // setTimeout(() => {
-    //     console.log(movies);
-    // }, 3000);
+    };
 
     return (
         <Wrapper>
-            <Header />
+            <Header onSubmit={getMovies} />
             {loading ? <p>Loading movies</p> : <Featured movies={movies} />}
         </Wrapper>
     );

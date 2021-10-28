@@ -8,18 +8,71 @@ const MovieWrapper = styled.div`
     flex-wrap: wrap;
     justify-content: space-around;
     align-content: center;
-    p {
+    margin-top: 40px;
+
+    .movie-item {
+        box-shadow: 0 5px 10px rgb(0 0 0 / 0.7);
+        margin-bottom: 40px;
+        margin-top: 20px;
+    }
+
+    .movie-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        background-color: #413c69;
+        margin-top: -3px;
+    }
+
+    .movie-info,
+    h1 {
+        color: #fff;
+        font-size: 14px;
+    }
+    .tag {
+        font-size: 16px;
+        border-radius: 50%;
+        background-color: #8b84c0;
+        padding: 10px;
+        min-width: 18px;
         text-align: center;
+    }
+    .green {
+        color: green;
+    }
+    .orange {
+        color: orange;
+    }
+    .red {
+        color: red;
     }
 `;
 
 const Featured = ({ movies }) => {
+    const ratingColor = (rating) => {
+        if (rating >= 8) {
+            return 'green';
+        } else if (rating >= 6) {
+            return 'orange';
+        } else {
+            return 'red';
+        }
+    };
+
     return (
         <MovieWrapper>
             {movies.map((movie) => (
-                <div key={movie.id}>
+                <div className='movie-item' key={movie.id}>
                     <img src={IMG_API + movie.poster_path} alt={movie.title} />
-                    <p>{movie.title}</p>
+                    <div className='movie-info'>
+                        <h3>{movie.title}</h3>
+                        <span
+                            className={`tag ${ratingColor(movie.vote_average)}`}
+                        >
+                            {movie.vote_average}
+                        </span>
+                    </div>
                 </div>
             ))}
         </MovieWrapper>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Featured from './Featured';
 import Header from './Header';
+import Loading from './Loading';
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const FEATURED_API = `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`;
@@ -12,9 +13,8 @@ const Wrapper = styled.div`
         src: url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
     }
 
-    font-family: 'Ubuntu', --apple-system, BlinkMacSystemFont, 'Segoe UI',
-        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-        sans-serif;
+    font-family: --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
     background-color: #413c69;
 `;
@@ -42,7 +42,12 @@ const App = () => {
     return (
         <Wrapper>
             <Header onSubmit={getMovies} />
-            {loading ? <p>Loading movies</p> : <Featured movies={movies} />}
+
+            {loading ? (
+                <Loading content={'Loading'} />
+            ) : (
+                <Featured movies={movies} />
+            )}
         </Wrapper>
     );
 };

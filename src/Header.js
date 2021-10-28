@@ -2,13 +2,22 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Nav = styled.header`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    width: 100%;
     background-color: #4a47a3;
     color: #fff;
-    margin-top: -10px;
-    min-width: 100%;
+
+    .nav-wrapper {
+        width: 950px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    input {
+        padding: 10px;
+        border-width: 0px;
+    }
 `;
 
 const apiKey = process.env.REACT_APP_API_KEY;
@@ -28,14 +37,16 @@ const Header = ({ onSubmit }) => {
 
     return (
         <Nav>
-            <h1>FILMS</h1>
-            <form onSubmit={handleOnSubmit}>
-                <input
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder='Search for a movie'
-                    type='text'
-                />
-            </form>
+            <div className='nav-wrapper'>
+                <h1>FILMS</h1>
+                <form onSubmit={handleOnSubmit}>
+                    <input
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder='Search for a movie'
+                        type='text'
+                    />
+                </form>
+            </div>
         </Nav>
     );
 };

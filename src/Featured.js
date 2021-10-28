@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Placeholder from './assets/placeholder.png';
 
 const IMG_API = 'https://image.tmdb.org/t/p/w300';
 
@@ -15,8 +16,9 @@ const MovieWrapper = styled.div`
 
     .movie-item {
         box-shadow: 0 5px 10px rgb(0 0 0 / 0.7);
-        margin-bottom: 40px;
+        margin-bottom: 100px;
         margin-top: 20px;
+        height: 450px;
     }
 
     .movie-info {
@@ -28,10 +30,16 @@ const MovieWrapper = styled.div`
         margin-top: -3px;
     }
 
-    .movie-info,
-    h1 {
+    img {
+        width: 300px;
+        height: 100%;
+    }
+
+    .movie-info h3 {
         color: #fff;
-        font-size: 14px;
+        font-size: 16px;
+        width: 200px;
+        line-height: 1.5em;
     }
     .tag {
         font-size: 16px;
@@ -40,15 +48,16 @@ const MovieWrapper = styled.div`
         padding: 10px;
         min-width: 18px;
         text-align: center;
+        box-shadow: 0 1px 1px rgb(0 0 0 / 0.1);
     }
     .green {
-        color: green;
+        color: #00e400;
     }
     .orange {
-        color: orange;
+        color: #ffc423;
     }
     .red {
-        color: red;
+        color: #ff1919;
     }
 `;
 
@@ -67,7 +76,19 @@ const Featured = ({ movies }) => {
         <MovieWrapper>
             {movies.map((movie) => (
                 <div className='movie-item' key={movie.id}>
-                    <img src={IMG_API + movie.poster_path} alt={movie.title} />
+                    {movie.poster_path ? (
+                        <img
+                            src={IMG_API + movie.poster_path}
+                            alt={movie.title}
+                        />
+                    ) : (
+                        <img
+                            src={Placeholder}
+                            alt={`Placeholder for movie ${movie.title}`}
+                            style={{ width: '300px' }}
+                        />
+                    )}
+
                     <div className='movie-info'>
                         <h3>{movie.title}</h3>
                         <span

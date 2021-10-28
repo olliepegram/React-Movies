@@ -17,12 +17,12 @@ const Loading = ({ content }) => {
             return text === content + '...'
                 ? setText(content)
                 : setText((prev) => prev + '.');
-        }, 500);
+        }, 50);
 
         return () => {
             return clearInterval(interval);
         };
-    }, [text]);
+    }, [text, content]);
 
     return <LoadingText>{text}</LoadingText>;
 };

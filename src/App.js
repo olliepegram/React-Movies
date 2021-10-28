@@ -15,8 +15,8 @@ const Wrapper = styled.div`
     font-family: 'Ubuntu', --apple-system, BlinkMacSystemFont, 'Segoe UI',
         Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
         sans-serif;
-    margin: 0;
-    padding: 0;
+
+    background-color: #413c69;
 `;
 
 const App = () => {

@@ -6,7 +6,10 @@ const IMG_API = 'https://image.tmdb.org/t/p/w300';
 const MovieWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
+    width: 950px;
+    margin: 0 auto;
+    align-items: center;
     align-content: center;
     margin-top: 40px;
 
@@ -21,7 +24,7 @@ const MovieWrapper = styled.div`
         align-items: center;
         justify-content: space-between;
         padding: 10px;
-        background-color: #413c69;
+        background-color: #4a47a3;
         margin-top: -3px;
     }
 

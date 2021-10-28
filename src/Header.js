@@ -5,7 +5,7 @@ const Nav = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #413c69;
+    background-color: #4a47a3;
     color: #fff;
     margin-top: -10px;
     min-width: 100%;

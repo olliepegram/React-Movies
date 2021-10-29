@@ -17,7 +17,7 @@ const Loading = ({ content }) => {
             return text === content + '...'
                 ? setText(content)
                 : setText((prev) => prev + '.');
-        }, 50);
+        }, 200);
 
         return () => {
             return clearInterval(interval);

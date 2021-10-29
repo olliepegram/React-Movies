@@ -19,6 +19,7 @@ const MovieWrapper = styled.div`
         margin-bottom: 100px;
         margin-top: 20px;
         height: 450px;
+        cursor: pointer;
     }
 
     .movie-info {
@@ -61,7 +62,7 @@ const MovieWrapper = styled.div`
     }
 `;
 
-const Featured = ({ movies }) => {
+const Featured = ({ onSelectedMovie, movies }) => {
     const ratingColor = (rating) => {
         if (rating >= 8) {
             return 'green';
@@ -75,7 +76,11 @@ const Featured = ({ movies }) => {
     return (
         <MovieWrapper>
             {movies.map((movie) => (
-                <div className='movie-item' key={movie.id}>
+                <div
+                    onClick={() => onSelectedMovie(movie.id)}
+                    className='movie-item'
+                    key={movie.id}
+                >
                     {movie.poster_path ? (
                         <img
                             src={IMG_API + movie.poster_path}

@@ -22,6 +22,7 @@ const Nav = styled.header`
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
+const FEATURED_API = `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`;
 
 const Header = ({ onSubmit }) => {
     const [search, setSearch] = useState('');
@@ -38,12 +39,13 @@ const Header = ({ onSubmit }) => {
     return (
         <Nav>
             <div className='nav-wrapper'>
-                <h1>FILMS</h1>
+                <h1 onClick={() => onSubmit(FEATURED_API)}>FILMS</h1>
                 <form onSubmit={handleOnSubmit}>
                     <input
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder='Search for a movie'
                         type='text'
+                        value={search}
                     />
                 </form>
             </div>

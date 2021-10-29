@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useRouteMatch,
+    useParams,
+} from 'react-router-dom';
+
 import Featured from './Featured';
 import Header from './Header';
 import Loading from './Loading';
+import Movie from './Movie';
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const FEATURED_API = `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`;
@@ -9,6 +19,7 @@ const FEATURED_API = `https://api.themoviedb.org/3/trending/movie/week?api_key=$
 const App = () => {
     const [movies, setMovies] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [currentMovie, setCurrentMovie] = useState(null);
 
     useEffect(() => {
         getMovies(FEATURED_API);
@@ -26,16 +37,29 @@ const App = () => {
             });
     };
 
-    return (
-        <React.Fragment>
-            <Header onSubmit={getMovies} />
+    const handleClickedMovie = (selectedMovie) => {
+        setCurrentMovie(selectedMovie);
+    };
 
-            {loading ? (
-                <Loading content={'Loading'} />
-            ) : (
-                <Featured movies={movies} />
-            )}
-        </React.Fragment>
+    return (
+        <Router>
+            <Header onSubmit={getMovies} />
+            <Switch>
+                <Route exact path='/'>
+                    {loading ? (
+                        <Loading content={'Loading'} />
+                    ) : (
+                        <Featured
+                            onSelectedMovie={handleClickedMovie}
+                            movies={movies}
+                        />
+                    )}
+                </Route>
+                <Route exact path='movie/'>
+                    <Movie currentMovie={currentMovie} movies={movies} />
+                </Route>
+            </Switch>
+        </Router>
     );
 };
 

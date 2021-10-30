@@ -51,15 +51,6 @@ const MovieWrapper = styled.div`
         text-align: center;
         box-shadow: 0 1px 1px rgb(0 0 0 / 0.1);
     }
-    .green {
-        color: #00e400;
-    }
-    .orange {
-        color: #ffc423;
-    }
-    .red {
-        color: #ff1919;
-    }
 `;
 
 const Featured = ({ onSelectedMovie, movies }) => {
@@ -73,11 +64,16 @@ const Featured = ({ onSelectedMovie, movies }) => {
         }
     };
 
+    const handleMovieClick = (id) => {
+        onSelectedMovie(id);
+        window.scrollTo(0, 0);
+    };
+
     return (
         <MovieWrapper>
             {movies.map((movie) => (
                 <div
-                    onClick={() => onSelectedMovie(movie.id)}
+                    onClick={() => handleMovieClick(movie.id)}
                     className='movie-item'
                     key={movie.id}
                 >

@@ -14,6 +14,10 @@ const Nav = styled.header`
         margin: 0 auto;
     }
 
+    h1 {
+        cursor: pointer;
+    }
+
     input {
         padding: 10px;
         border-width: 0px;
@@ -36,10 +40,14 @@ const Header = ({ onSubmit }) => {
         setSearch('');
     };
 
+    const handleFeaturedClick = () => {
+        onSubmit(FEATURED_API);
+    };
+
     return (
         <Nav>
             <div className='nav-wrapper'>
-                <h1 onClick={() => onSubmit(FEATURED_API)}>FILMS</h1>
+                <h1 onClick={handleFeaturedClick}>FILMS</h1>
                 <form onSubmit={handleOnSubmit}>
                     <input
                         onChange={(e) => setSearch(e.target.value)}

@@ -17,3 +17,13 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.green {
+    color: #00e400;
+}
+.orange {
+    color: #ffc423;
+}
+.red {
+    color: #ff1919;
+}

@@ -1,12 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useRouteMatch,
-    useParams,
-} from 'react-router-dom';
 
 import Featured from './Featured';
 import Header from './Header';
@@ -37,29 +29,29 @@ const App = () => {
             });
     };
 
-    const handleClickedMovie = (selectedMovie) => {
-        setCurrentMovie(selectedMovie);
+    const handleClickedMovie = (id) => {
+        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setCurrentMovie(data);
+            });
     };
 
     return (
-        <Router>
+        <React.Fragment>
             <Header onSubmit={getMovies} />
-            <Switch>
-                <Route exact path='/'>
-                    {loading ? (
-                        <Loading content={'Loading'} />
-                    ) : (
-                        <Featured
-                            onSelectedMovie={handleClickedMovie}
-                            movies={movies}
-                        />
-                    )}
-                </Route>
-                <Route exact path='movie/'>
-                    <Movie currentMovie={currentMovie} movies={movies} />
-                </Route>
-            </Switch>
-        </Router>
+
+            {currentMovie && <Movie movie={currentMovie} />}
+
+            {loading ? (
+                <Loading content={'Loading'} />
+            ) : (
+                <Featured
+                    onSelectedMovie={handleClickedMovie}
+                    movies={movies}
+                />
+            )}
+        </React.Fragment>
     );
 };
 

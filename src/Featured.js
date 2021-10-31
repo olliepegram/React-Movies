@@ -71,31 +71,26 @@ const Featured = ({ onSelectedMovie, movies }) => {
 
     return (
         <MovieWrapper>
-            {movies.map((movie) => (
+            {movies.map(({ id, poster_path, title, vote_average }) => (
                 <div
-                    onClick={() => handleMovieClick(movie.id)}
+                    onClick={() => handleMovieClick(id)}
                     className='movie-item'
-                    key={movie.id}
+                    key={id}
                 >
-                    {movie.poster_path ? (
-                        <img
-                            src={IMG_API + movie.poster_path}
-                            alt={movie.title}
-                        />
+                    {poster_path ? (
+                        <img src={IMG_API + poster_path} alt={title} />
                     ) : (
                         <img
                             src={Placeholder}
-                            alt={`Placeholder for movie ${movie.title}`}
+                            alt={`Placeholder for movie ${title}`}
                             style={{ width: '300px' }}
                         />
                     )}
 
                     <div className='movie-info'>
-                        <h3>{movie.title}</h3>
-                        <span
-                            className={`tag ${ratingColor(movie.vote_average)}`}
-                        >
-                            {movie.vote_average}
+                        <h3>{title}</h3>
+                        <span className={`tag ${ratingColor(vote_average)}`}>
+                            {vote_average}
                         </span>
                     </div>
                 </div>

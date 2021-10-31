@@ -59,6 +59,7 @@ const Movie = ({ movie }) => {
         budget,
         vote_average,
         release_date,
+        poster_path,
     } = movie;
 
     const ratingColor = (rating) => {
@@ -79,12 +80,12 @@ const Movie = ({ movie }) => {
     return (
         <MovieWrap>
             <div>
-                {movie.poster_path ? (
-                    <img src={IMG_API + movie.poster_path} alt={movie.title} />
+                {poster_path ? (
+                    <img src={IMG_API + poster_path} alt={title} />
                 ) : (
                     <img
                         src={Placeholder}
-                        alt={`Placeholder for movie ${movie.title}`}
+                        alt={`Placeholder for movie ${title}`}
                         style={{ width: '300px' }}
                     />
                 )}

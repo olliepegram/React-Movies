@@ -104,7 +104,9 @@ const Movie = ({ movie }) => {
                 <div className='movie-details'>
                     <h4>Runtime: {runtime} mins</h4>
                     <h4>Release Date: {release_date}</h4>
-                    <h4>Budget: {formatter.format(budget)}</h4>
+                    {budget !== 0 ? (
+                        <h4>Budget: {formatter.format(budget)}</h4>
+                    ) : null}
                 </div>
             </div>
         </MovieWrap>
